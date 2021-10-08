@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+<meta charset=utf-8>
+<head>
+    <meta charset="UTF-8">
+    <title>Rule</title>
+</head>
+<body>
+
+<table>
+    <caption>博饼规则</caption>
+    <thead>
+        <tr>
+            <th>称号</th>
+            <th>积分</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>插金花</td>
+            <td>24</td>
+        </tr>
+        <tr>
+            <td>红六勃</td>
+            <td>22</td>
+        </tr>
+        <tr>
+            <td>遍地锦</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>黑六勃</td>
+            <td>18</td>
+        </tr>
+        <tr>
+            <td>五红</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>五子</td>
+            <td>14</td>
+        </tr>
+        <tr>
+            <td>四红</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td>对堂</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>三红</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>四进</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>二举</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>一举</td>
+            <td>2</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class = "center">
+    <b>
+        <p1 style = "text-align:center">1.每次博饼获得称号对应的积分如上。 </p1><br />
+        <p2 style = "text-align:center">2.每次博饼活动从开始到排行榜结算共持续24小时，期间每个用户都有3次博饼机会，最终积分为三次积分叠加。 </p2><br />
+        <p3 style = "text-align:center">3.博饼活动排行榜结算后，刷新排行榜，用户可以开始新一轮的博饼。 </p3><br />
+    </b>
+</div>
+
+<a href="http://8.130.174.158:8084/start">
+    <button type="button" class="AnNiu" style="display:block;margin:0 auto; width:150px; height:50px;">准备开始</button>
+</a>
+
+</body>
+</html>
+
+<style>
+    .center{
+        margin: auto;
+        width: 77%;
+        border: 3px solid green;
+        padding: 20px;
+    }
+    table{
+        margin: auto;
+        width: 80%;
+        border-collapse: collapse;
+    }
+
+    table caption{
+        margin: auto;
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    th,td{
+        width: 50%;
+        border: 1px solid #999;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    table thead tr{
+        background-color: #008c8c;
+        color: #fff;
+    }
+
+    table tbody tr:nth-child(odd){
+        background-color: #eee;
+    }
+
+    table tbody tr:hover{
+        background-color: #ccc;
+    }
+
+    table tbody tr td:first-child{
+        color: #f40;
+    }
+
+     .AnNiu {
+         margin:auto;
+         width:100px;
+         text-align:center;
+         line-height:100%;
+         padding:0.3em;
+         font:16px Arial,sans-serif bold;
+         font-weight:bold;
+         font-style:normal;
+         font-size:x-large;
+         text-decoration:none;
+         vertical-align:text-bottom;
+         zoom:1;
+         outline:none;
+         font-stretch:normal;
+         border-radius:50px;
+         box-shadow:0px 1px 2px rgba(0,0,0,0.2);
+         text-shadow:0px 1px 1px rgba(0,0,0,0.3);
+         color:#fefee9;
+         border:0.2px solid #ff4b22;
+         background-size:auto;
+         background-origin:padding-box;
+         background-clip:padding-box;
+         background: #ff6333 linear-gradient(to bottom, #eeeff9 0%, #ff6333 100%) repeat;
+     }
+
+    .AnNiu:hover {
+        background: #ff4726;
+    }
+</style>
+

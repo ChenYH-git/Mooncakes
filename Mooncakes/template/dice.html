@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>投掷骰子</title>
+		<style>
+			html{
+				height:100%;
+			}
+			
+			#d1{
+				text-align:center;
+			}
+			h1{
+				color:red;
+				font-family:隶书;
+				font-size:50px;
+			}
+			#d2{
+				height:400px;
+				width:600px;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+				position:absolute;
+			}
+			#img1{
+				height:100%;
+				width:100%;
+				z-index:1;
+				
+				position:absolute;
+			}
+			#img2{
+				height:50%;
+				width:50%;
+				z-index:2;
+				top:40%;
+				left:50%;
+				transform:translate(-50%,-50%);
+				position:relative;
+			}
+			#bt{
+				background-color:gray;
+				height:50px;
+				width:200px;
+				color:white;
+				font-size:25px;
+				position:absolute;
+				right:50%;
+				bottom:5%;
+				transform: translate(+50%,-50%);
+			}
+			#bt:hover{
+				background-color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id=d1>
+			<h1>投掷中......</h1>
+		</div>
+		<div id=d2>
+		<img src="../static/imgs/wan.jpg" id=img1>
+		<img src="../static/imgs/touzi.gif" id=img2>
+		</div>
+		<a href='http://8.130.174.158:8084/result'>
+		<input type=button value='查看结果' id=bt>
+		</a>
+	</body>
+</html>

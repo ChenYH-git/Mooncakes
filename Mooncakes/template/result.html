@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"> </script>
+		<meta charset=utf-8>
+		<title>投掷结果</title>
+		<style>
+			html{
+				height:100%;
+			}
+			body{
+				background-image:url("../static/imgs/4.1.jpg");
+				background-repeat:no-repeat;
+				background-size:100% 100%;
+			}
+			#d1{
+				text-align:center;
+			}
+			h1{
+				color:yellow;
+				font-family:隶书;
+				font-size:100px;
+			}
+			#bt{
+				background-color:gray;
+				height:50px;
+				width:200px;
+				color:white;
+				font-size:25px;
+				position:absolute;
+				right:50%;
+				bottom:0;
+				transform: translate(+50%,0);
+			}
+			#bt:hover{
+				background-color:yellow;
+			}
+			#imgdiv{
+				left:50%;
+				top:60%;
+				width:800px;
+				height:200px;
+				position:absolute;
+				transform: translate(-50%,-50%);
+			}
+			#imgdiv img{
+				height:100px;
+				width:100px;
+			}
+			#text2{
+				left:50%;
+				top:60%;
+				width:800px;
+				height:150px;
+				position:absolute;
+				transform: translate(-50%,-50%);
+				text-align:center;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				var nums=new Array();
+				var length=6;
+				var i=0;
+				var fournum=0;
+				var onenum=0;
+				var twonum=0;
+				var threenum=0;
+				var fournum=0;
+				var fivenum=0;
+				var sixnum=0;
+				var grade=0;
+				for(i=0;i<length;i++){
+					nums[i]=Math.floor(Math.random()*10)%6+1;
+					if(nums[i]==1) onenum++;
+					if(nums[i]==4) fournum++;
+					if(nums[i]==2) twonum++;
+					if(nums[i]==3) threenum++;
+					if(nums[i]==5) fivenum++;
+					if(nums[i]==6) sixnum++;
+				}
+				var myimgdiv=document.getElementById("imgdiv");
+				for(i=0;i<length;i++){
+					var myimg=document.createElement("img");
+					myimg.src="../static/imgs/dice"+nums[i]+".png";
+					myimgdiv.appendChild(myimg);
+				}
+				var mytextdiv=document.getElementById("text2");
+				var mytext=document.createElement("h1");
+				if(fournum==1){
+					var text=document.createTextNode("一秀");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=2;
+				}
+				else if(fournum==2){
+					var text=document.createTextNode("二举");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=4;
+				}
+				else if(fournum==3){
+					var text=document.createTextNode("三红");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=8;
+				}
+				else if(fournum==4&&onenum<=2){
+					var text=document.createTextNode("四红");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=12;
+				}
+				else if(fournum==5){
+					var text=document.createTextNode("五红");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=16;
+				}
+				else if(fournum==6){
+					var text=document.createTextNode("红六勃");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=22;
+				}
+				else if(fournum==4&&onenum==2){
+					var text=document.createTextNode("插金花");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=24;
+				}
+				else if(onenum==6){
+					var text=document.createTextNode("遍地锦");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=20;
+				}
+				else if(twonum==6||threenum==6||fivenum==6||sixnum==6){
+					var text=document.createTextNode("黑六勃");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=18;
+				}
+				else if(onenum==5||twonum==5||threenum==5||fivenum==5||sixnum==5){
+					var text=document.createTextNode("五子登科");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=14;
+				}
+				else if(onenum==1&&twonum==1&&threenum==1&&fournum==1&&fivenum==1&&sixnum==1){
+					var text=document.createTextNode("对堂");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=10;
+				}
+				else if(onenum==4||twonum==4||threenum==4||fivenum==4||sixnum==4){
+					var text=document.createTextNode("四进");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+					grade=6;
+				}
+				else{
+					var text=document.createTextNode("未中奖");
+					mytext.appendChild(text);
+					mytextdiv.appendChild(mytext);
+				}
+				$.ajax({
+					url: "http://8.130.174.158:8084/api/v2/dice",    // 提交到controller的url路径
+					headers: {
+						"Authorization": "Bearer " + localStorage.token
+					},
+					type: "PUT",    // 提交方式
+					data: {"score": grade},  // data为String类型，必须为 Key/Value 格式。
+					dataType: "json",    // 服务器端返回的数据类型
+					success: function (data) {    // 请求成功后的回调函数，其中的参数data为controller返回的map,也就是说,@ResponseBody将返回的map转化为JSON格式的数据，然后通过data这个参数取JSON数据中的值
+						if (data.msg == "success") {
+							alert("投掷成功");
+						} else if (data.msg == "no_chance"){
+							alert("没次数了");
+							window.location.href="http://8.130.174.158:8084/prepare"
+						} else{
+							alert("需要登录");
+							window.location.href="http://8.130.174.158:8084/"
+						}
+					},
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div id=d1>
+			<h1>最终结果</h1>
+		</div>
+		<div id=imgdiv>
+		</div>
+		<div id=text2>
+		</div>
+		<a href="http://8.130.174.158:8084/rank">
+			<input type=button value='排行榜' id=bt>
+		</a>
+	</body>
+</html>
