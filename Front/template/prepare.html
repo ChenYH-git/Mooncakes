@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>主页</title>
+		<style type="text/css">
+			html{
+			height:100%;
+			}
+			input{
+				height:50px;
+				width:200px;
+				background-color:gray;
+				font-size:25px;
+				color:white;
+				position:absolute;
+			}
+			body{
+				background-image:url("../static/imgs/bg.png");
+				background-repeat:no-repeat;
+				background-size:100% 100%;
+				
+			}
+			#bt1{
+				left:0px;
+				bottom:0px;
+			}
+			#bt2{
+				right:0px;
+				bottom:0px;
+			}
+			#bt1:hover{
+			background-color:red;
+			}
+			#bt2:hover{
+			background-color:red;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<a href='http://8.130.174.158:8084/rank'>
+			<input type=button value='查看当前排行榜' id=bt1>
+		</a>
+		<a href="http://8.130.174.158:8084/ready">
+			<input type=button value='进入博饼界面' id=bt2>
+		</a>
+	</body>
+</html>

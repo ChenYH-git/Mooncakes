@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"> </script>
+		<meta charset=utf-8>
+		<title>排行榜</title>
+		<script>
+			window.onload=function(){
+				$.ajax({
+					url: "http://8.130.174.158:8084/api/v2/rank",
+					type: "GET",
+					headers: {
+						"Authorization": "Bearer " + localStorage.token
+					},
+					dataType: "json",
+					success: function (data) {
+						if (data.msg == "success") {
+							alert("获取排行榜成功");
+						} else{
+							alert("需要登录");
+							window.location.href="http://8.130.174.158:8084/"
+						}
+						var chance=document.getElementById("chances");
+						chance.innerHTML="剩余博饼次数：" + data.data.me[0].Chances;
+						var grade=document.getElementById("grade");
+						grade.innerHTML="当前积分：" + data.data.me[0].Score;
+						var body=document.getElementById("body");
+						var length=body.childNodes.length;
+						var j=0;
+						var index=0;
+						for(j=0;j<length;j++){
+							//console.log(length);
+							if(body.childNodes[j].nodeType==1){
+								var clength=body.childNodes[j].childNodes.length;
+								var i=0;
+								for(i=0;i<clength;i++){
+									if(body.childNodes[j].childNodes[i].nodeType==1){
+										if(i==1){
+											var txt=document.createTextNode(data.data.rank[index].Username);
+											body.childNodes[j].childNodes[i].appendChild(txt);
+										}
+										else if(i==3){
+											var txt=document.createTextNode(data.data.rank[index].Score);
+											body.childNodes[j].childNodes[i].appendChild(txt);
+										}
+										else{
+											var txt=document.createTextNode(data.data.rank[index].Gift);
+											body.childNodes[j].childNodes[i].appendChild(txt);
+										}
+									}
+								}
+								index++;
+							}
+
+						}
+					},
+				});
+
+
+			}
+		</script>
+		<style>
+			caption{
+				font-family:隶书;
+				font-size:50px;
+				color:yellow;
+			}
+			div{
+				position:absolute;
+				top:0;
+				right:0;
+				width:300px;
+				height:600px;
+			
+			}
+			img{
+				height:300px;
+				width:100%;
+			}
+			#bt1{
+				background-color:gray;
+				height:50px;
+				width:200px;
+				color:white;
+				font-size:30px;
+				position:absolute;
+				bottom:0px;
+			}
+			#bt2{
+				background-color:gray;
+				height:50px;
+				width:200px;
+				color:white;
+				font-size:30px;
+				position:absolute;
+				right:0px;
+				bottom:0px;
+			}
+			#bt1:hover,#bt2:hover{
+				background-color:yellow;
+			}
+			#cdiv{
+				font-family:隶书;
+				position:absolute;
+				top:350px;
+				right:0;
+				width:300px;
+				height:100px;
+			}
+			#gdiv{
+				position:absolute;
+				top:450px;
+				right:0;
+				width:300px;
+				height:100px;
+				font-family:隶书;
+			}
+
+		</style>
+	</head>
+	<body>
+		<table  border=2 bgcolor=white bordercolor=black height=480px width=600px>
+		<caption>排行榜</caption>
+			<thead>
+				<th>上榜玩家</th>
+				<th>当前总积分</th>
+				<th>获得礼物</th>
+			</thead>
+			<tbody id = body>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr >
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr >
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr >
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr >
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				
+			</tbody>
+		</table>
+
+		<div id=rightdiv>
+			<img src="../static/imgs/5.png">
+			<div id=cdiv>
+				<h1 id=chances></h1>
+			</div>
+			<div id=gdiv>
+				<h1 id=grade></h1>
+			</div>
+		</div>
+
+		<a href="http://8.130.174.158:8084/prepare">
+			<input type=button value='返回主页' id=bt1>
+		</a>
+		<a href="http://8.130.174.158:8084/dice">
+			<input type=button value='再博一次' id=bt2>
+		</a>
+	</body>
+</html>
