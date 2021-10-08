@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"> </script>
+		<meta charset=utf-8>
+		<title>注册界面</title>
+		<script>
+			window.onload=function(){
+				var btn=document.getElementById('submitbt');
+				btn.onclick=function(){
+					var pwd1=document.getElementById('p1');
+					var s1=pwd1.value;
+					var pwd2=document.getElementById('p2');
+					var s2=pwd2.value;
+						//var user=$("#root").val();
+						var user=document.getElementById("root");
+						var username=user.value;
+						$.ajax({
+							url: 'http://8.130.174.158:8084/api/v2/signup',    // 提交到controller的url路径
+							type: 'POST',    // 提交方式
+							data: {'username':username, 'password':s1, "re_password": s2},  // data为String类型，必须为 Key/Value 格式。
+							dataType: 'json',    // 服务器端返回的数据类型
+							success: function (data){// 请求成功后的回调函数，其中的参数data为controller返回的map,也就是说,@ResponseBody将返回的map转化为JSON格式的数据，然后通过data这个参数取JSON数据中的值
+								if (data.msg === "success") {
+									alert("注册成功");
+									window.location.href="http://8.130.174.158:8084/"
+								}
+							},
+							error: function (data) {
+								if (data.msg != "success") {
+									alert("注册失败")
+								}
+							}
+						});
+				}
+				
+			}
+		</script>
+		<style>
+			html{
+				height:100%;
+			}
+			body{
+				background-image:url("../static/imgs/g2.gif");
+				background-size:100% 100%;
+				background-repeat:no-repeat;
+			}
+			#total{
+				position:absolute;
+				top:50%;
+				left:50%;
+				transform:translate(-50%,-50%);
+				height:60%;
+				width:30%;
+				color:white;
+				background:rgba(0,0,0,0.2);
+			}
+			#welcome{
+				height:30px;
+				width:100%;
+				text-align:center;
+				
+			}
+			h1{
+				font-size:30px;
+				color:white;
+			}
+			input{
+				outline-style: none ;
+				border:0;
+				border-bottom:1px solid black;				
+				border-radius: 3px;
+				padding: 10px 5px;
+				background-color:transparent;
+			}
+			#submitbt,#bt{
+				position:absolute;
+				left:50%;
+				transform:translate(-50%,0);
+				background-color:white;
+				boder:2px black solid;
+			}
+			#submitbt:hover,#bt:hover{
+				background-color:black;
+				color:white;
+			}
+			#root,#p1,#p2{
+				background-color: white;
+				color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id=total>
+			<div id=welcome>
+			<h1>Welcome</h1>
+			</div><br><br>
+			<form>
+			创建用户名：
+			<input type=text name='uer' id=root><br><br>
+			输入新密码:
+			<input type=password name='pwd' id=p1><br><br>
+			确认新密码：
+			<input type=password name='repwd' id=p2><br><br>
+			<input type=button id=submitbt style='width:200px' value='确认注册'><br><br>
+			</form>
+			<a href='http://8.130.174.158:8084/'><input type=button id=bt style='width:200px' value='返回登录'></a>
+		</div>
+	</body>
+</html>	
+	
